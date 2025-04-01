@@ -6,7 +6,7 @@ def estrai_dati(file_path):
     xls = pd.ExcelFile(file_path)
     df = pd.read_excel(xls, sheet_name="Scarico REGISTRAZIONI")
     
-    accensione = df.iloc[1, 0]  # Supponiamo che il primo orario valido sia qui
+    accensione = df.iloc[2, 0]  # Supponiamo che il primo orario valido sia qui
     data_analisi = accensione[:5]
     ora_accensione = accensione[-5:]
     
@@ -20,8 +20,9 @@ def estrai_dati(file_path):
 def genera_report_con_llm(data_analisi, ora_accensione, eventi):
     """Genera il report utilizzando un LLM locale tramite Ollama."""
     prompt = f"""
+    Sei un tecnico esperti di treni, stai leggendo un report dettagliato di un treno,
     Genera un report in linguaggio naturale basato sui seguenti eventi:
-    
+
     Data: {data_analisi}
     Ora di accensione: {ora_accensione}
     Eventi registrati:
@@ -37,7 +38,7 @@ def genera_report_con_llm(data_analisi, ora_accensione, eventi):
     2. Descrizione chiara e fluida degli eventi.
     3. Conclusione che riassume la situazione generale.
     
-    Scrivi il report.
+    Scrivi il report basandoti unicamente sugli eventi presenti nel file.
     """
     
     risposta = ollama.chat(model='mistral', messages=[{'role': 'user', 'content': prompt}])
