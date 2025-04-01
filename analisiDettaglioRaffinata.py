@@ -44,7 +44,7 @@ def genera_report_con_llm(data_analisi, ora_accensione, eventi):
     return risposta['message']['content']
 
 # Percorso del file
-file_path = "/mnt/data/DETTAGLIO_CASO_TOILETTE_FUOR_SERVIZIO.xlsx"
+file_path = "dati/DETTAGLIO_CASO_TOILETTE_FUOR_SERVIZIO.xlsx"
 data_analisi, ora_accensione, eventi = estrai_dati(file_path)
 report = genera_report_con_llm(data_analisi, ora_accensione, eventi)
 print(report)
