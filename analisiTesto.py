@@ -33,10 +33,13 @@ def trova_colonna_corrispondente(testo, categorie,soglia=0.2):
     return colonna_selezionata
 
 # Esempio di utilizzo
-percorso_excel = "dati/GENERALE_CASO_TOILETTE_FUORI_SERVIZIO.xlsx"  # Sostituisci con il tuo file Excel
+percorso_excel = "dati/DETTAGLIO_CASO_TOILETTE_FUOR_SERVIZIO.xlsx"  # Sostituisci con il tuo file Excel
 colonne, df = carica_dati_excel(percorso_excel)
 
 testo_input = "Il bagno è fuori servizio e nessuno lo sta riparando."
 colonna_trovata = trova_colonna_corrispondente(testo_input, categorie)
 
 print(f"Colonna identificata: {colonna_trovata}")
+#Se il testo è generico e non troviamo un matching controlliamo tutte le colonne che potrebbero avere degli errori (stabilite a prescindere)
+#Altrimenti si dà priorità al testo
+
