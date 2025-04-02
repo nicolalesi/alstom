@@ -34,13 +34,15 @@ def genera_report_con_llm(data_analisi, ora_accensione, eventi):
     prompt += """
     
     Il report deve essere strutturato come segue:
-    1. Introduzione con data e ora di accensione.
-    2. Descrizione chiara e fluida degli eventi.
-    3. Conclusione che riassume la situazione generale.
+    1.Introduzione con data e ora di accensione.
+    2.Descrizione chiara e fluida degli eventi.
+    3.Conclusione che riassume la situazione generale.
+    4. Riassunto che scriva semplicemente se alla fine del file gli impianti in esame sono in funzione o meno.
     
     Scrivi il report basandoti unicamente sugli eventi presenti nel file.
+
     """
-    
+    #Per quanto riguarda i contatori dovremmo passargli i dati come già facciamo negli eventi e poi farglieli elaborare come nel reoprt
     risposta = ollama.chat(model='mistral', messages=[{'role': 'user', 'content': prompt}])
     return risposta['message']['content']
 
