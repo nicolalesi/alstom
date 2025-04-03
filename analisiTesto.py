@@ -1,6 +1,11 @@
 import spacy
 import pandas as pd
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import os
 
+
+# Carica il modello di linguaggio di Spacy
 nlp = spacy.load("it_core_news_lg")
 
 # Dizionario che associa le colonne del file Excel a parole chiave
@@ -25,67 +30,77 @@ def trova_colonna_corrispondente(testo, categorie,soglia=0.2):
             doc_parola = nlp(parola.lower())
             if doc_parola.has_vector:  # Evita parole senza embedding
                 similarita = doc_input.similarity(doc_parola)
-                #print(f"Similarità tra '{testo}' e '{parola}': {similarita:.2f}")  # Debug: visualizza la similarità
                 if similarita >= similarita_max:
                     similarita_max = similarita
                     colonna_selezionata.add(colonna)
 
     return colonna_selezionata
 
-import os
-
-import os
-import pandas as pd
-
 def checkErrors(df, colonne):
     """Controlla se almeno una delle colonne ha il valore 1 e avvia 'analisiDettaglio.py' se necessario."""
-
-    # Normalizziamo i nomi delle colonne nel DataFrame
     df.columns = df.columns.str.strip().str.lower()
-
-    # Normalizziamo i nomi delle colonne in input
     colonne_norm = [col.strip().lower() for col in colonne]
 
-    errore_trovato = False  # Flag per verificare se ci sono valori 1
+    errore_trovato = False
 
     for colonna_norm in colonne_norm:
         if colonna_norm in df.columns:
-            print(f"🔍 Controllando colonna: {colonna_norm}")  # Debug
-
-            # Convertiamo la colonna in numerico (forza '1' stringa -> 1 numero)
             df[colonna_norm] = pd.to_numeric(df[colonna_norm], errors='coerce')
 
-            # Stampiamo un'anteprima dei valori per debugging
-            print(f"📊 Valori unici nella colonna {colonna_norm}: {df[colonna_norm].unique()}")
-
-            # Controlliamo se almeno un valore è 1
             if (df[colonna_norm] == 1).any():
-                print(f"⚠️ Trovato almeno un '1' nella colonna '{colonna_norm}'")
                 errore_trovato = True
-            else:
-                print(f"✅ Nessun '1' trovato nella colonna '{colonna_norm}'")
-        else:
-            print(f"❌ La colonna '{colonna_norm}' non esiste nel DataFrame.")
 
-    # Se c'è almeno un '1', esegui lo script "analisiDettaglio.py"
     if errore_trovato:
         print("🚀 Eseguo analisiDettaglio.py...")
-        os.system("python analisiDettaglio.py")  # Esegui lo script
-        #ora il path di dettaglio è predefinito in analisiDettaglio, ma richiamando lo script può essere passato come parametro
+        os.system("python analisiDettaglio.py")
 
+# Funzione per gestire il caricamento del file Excel tramite la GUI
+def carica_file():
+    percorso_file = filedialog.askopenfilename(filetypes=[("Excel Files", "*.xlsx")])
+    if percorso_file:
+        colonne, df = carica_dati_excel(percorso_file)
+        return df, colonne
+    else:
+        messagebox.showerror("Errore", "Nessun file selezionato!")
+        return None, None
 
-# Esempio di utilizzo
+# Funzione per eseguire l'elaborazione quando l'utente invia il testo
+def esegui_analisi():
+    testo_input = testo_entry.get()
+    if not testo_input:
+        messagebox.showerror("Errore", "Inserisci un testo!")
+        return
 
-#Questo sarebbe poi da rendere generico per tutti, andrebbe estratta la parte finale del generale e ricavarsi il dettaglio oppure si passano in input
-percorso_excel = "dati/GENERALE_CASO_TOILETTE_FUORI_SERVIZIO.xlsx"  # Sostituisci con il tuo file Excel
-colonne, df = carica_dati_excel(percorso_excel)
+    # Carica il file Excel e trova la colonna corrispondente
+    df, colonne = carica_file()
+    if df is None:
+        return
 
-testo_input = "Il bagno è fuori servizio e nessuno lo sta riparando."
-colonna_trovata = trova_colonna_corrispondente(testo_input, categorie)
+    colonna_trovata = trova_colonna_corrispondente(testo_input, categorie)
+    if colonna_trovata:
+        checkErrors(df, colonna_trovata)
+        messagebox.showinfo("Analisi completata", f"Colonna identificata: {colonna_trovata}")
+    else:
+        messagebox.showerror("Errore", "Nessuna corrispondenza trovata nel testo.")
 
-print(f"Colonna identificata: {colonna_trovata}")
-#Se il testo è generico e non troviamo un matching controlliamo tutte le colonne che potrebbero avere degli errori (stabilite a prescindere)
-#Altrimenti si dà priorità al testo
-#print(df.columns.tolist())
+# Creazione dell'interfaccia grafica con Tkinter
+root = tk.Tk()
+root.title("Analisi Dati WC Fuori Servizio")
 
-checkErrors(df, colonna_trovata)
+# Creazione del frame principale
+frame = tk.Frame(root)
+frame.pack(padx=20, pady=20)
+
+# Label e Entry per il testo
+testo_label = tk.Label(frame, text="Inserisci il testo:")
+testo_label.grid(row=0, column=0, padx=10, pady=10)
+
+testo_entry = tk.Entry(frame, width=40)
+testo_entry.grid(row=0, column=1, padx=10, pady=10)
+
+# Bottone per eseguire l'analisi
+analizza_button = tk.Button(frame, text="Esegui Analisi", command=esegui_analisi)
+analizza_button.grid(row=1, columnspan=2, pady=20)
+
+# Avvia l'interfaccia grafica
+root.mainloop()
