@@ -1,0 +1,29 @@
+ Report di Stato degli Impianti
+
+   Data e Ora: [Data e ora tratta dal file]
+
+   Durante la giornata, si è verificato il seguente stato degli impianti:
+
+   1. Inizialmente, l'impianto WC era in servizio ed era libero. L'impianto di scarico dei rifiuti (sistema scarico tazza) non ha presentato problemi all'inizio.
+
+   2. Successivamente, si è verificata l'isolamento del WC, che è passato quindi in stato "fuori servizio". In contemporanea con questo evento, è avvenuto il reset dello stato del sistema scarico tazza.
+
+   3. Più avanti nella giornata, si è rilevato un'anomalia nel sistema scarico tazza per cui lo stato è passato a "occupato". Al contempo, la porta ha subito un'apertura e il WC è stato liberato.
+
+   4. Successivamente, si sono verificati molti avvicendamenti di stati tra lo stato "fuori servizio" e lo stato "in servizio" per il sistema scarico tazza e la porta. Inoltre, sono state rilevate diverse anomalie nel sistema scarico tazze per cui lo stato è stato variamente impostato a "occupato" o "reset".
+
+   5. Infine, si è verificata l'isolamento del WC che ha fatto passare nuovamente questo impianto in stato "fuori servizio". In contemporanea con questo evento, la porta è stata riaperta e l'impianto di scarico dei rifiuti è tornato a essere libero.
+
+   Conclusione: Al termine della giornata, si ha una situazione complessa ed instabile degli impianti in esame. Il WC è stato in generale in stato "fuori servizio" e il sistema scarico tazza è presente continuamente in uno stato anomalo, sebbene la porta abbia subito vari apporti per tentare di risolvere i problemi riscontrati.
+
+   Riassunto: Gli impianti in esame non sono funzionanti alla fine del file.
+TOI:Contatore Attivazioni Sciacquone -> Min: 6415.0, Max: 6485.0
+TOI:Contatore Attivazioni Rubinetto -> Min: 3932.0, Max: 3972.0
+TOI:Contatore Operazioni Lavandino -> Min: 4390.0, Max: 4408.0
+TOI:Contatore Attivazioni Asciugami -> Min: 1166.0, Max: 1171.0
+TOI:Contatore Operazioni Pompa -> Min: 6243.0, Max: 6272.0
+TOI:Contatore Porta Chiusa e Bloccata -> Min: 3768.0, Max: 3810.0
+TOI2:Contatore Attivazioni Sciacquone -> Min: 10603.0, Max: 10604.0
+TOI2:Contatore Operazioni Lavandino -> Min: 8541.0, Max: 8543.0
+TOI2:Contatore Operazioni Pompa -> Min: 5826.0, Max: 5932.0
+TOI2:Contatore Porta Chiusa e Bloccata -> Min: 6127.0, Max: 6129.0

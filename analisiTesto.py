@@ -22,7 +22,7 @@ def carica_dati_excel(percorso_file):
 def trova_colonna_corrispondente(testo, categorie,soglia=0.2):
     """Trova la colonna più simile al testo in base alla similarità semantica."""
     doc_input = nlp(testo.lower())
-    similarita_max = 0
+    #similarita_max = 0
     colonna_selezionata = set()
 
     for colonna, parole_chiave in categorie.items():
@@ -30,8 +30,8 @@ def trova_colonna_corrispondente(testo, categorie,soglia=0.2):
             doc_parola = nlp(parola.lower())
             if doc_parola.has_vector:  # Evita parole senza embedding
                 similarita = doc_input.similarity(doc_parola)
-                if similarita >= similarita_max:
-                    similarita_max = similarita
+                if similarita >= soglia:
+                    #similarita_max = similarita
                     colonna_selezionata.add(colonna)
 
     return colonna_selezionata
@@ -51,8 +51,8 @@ def checkErrors(df, colonne):
                 errore_trovato = True
 
     if errore_trovato:
-        print("🚀 Eseguo analisiDettaglio.py...")
-        os.system("python analisiDettaglio.py")
+        print("Eseguo analisiDettaglio.py...")
+        os.system("python analisiDettaglioRaffinata.py")
 
 # Funzione per gestire il caricamento del file Excel tramite la GUI
 def carica_file():
@@ -78,8 +78,8 @@ def esegui_analisi():
 
     colonna_trovata = trova_colonna_corrispondente(testo_input, categorie)
     if colonna_trovata:
-        checkErrors(df, colonna_trovata)
         messagebox.showinfo("Analisi completata", f"Colonna identificata: {colonna_trovata}")
+        checkErrors(df, colonna_trovata)
     else:
         messagebox.showerror("Errore", "Nessuna corrispondenza trovata nel testo.")
 
