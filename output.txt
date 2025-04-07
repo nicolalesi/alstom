@@ -1,22 +1,34 @@
- Report di Stato degli Impianti
+ Report di Funzionamento dell'Impianto
 
-   Data e Ora: [Data e ora tratta dal file]
+   Data e Ora di Accensione: [data e ora presi dal file]
 
-   Durante la giornata, si è verificato il seguente stato degli impianti:
+   Descrizione degli Eventi:
 
-   1. Inizialmente, l'impianto WC era in servizio ed era libero. L'impianto di scarico dei rifiuti (sistema scarico tazza) non ha presentato problemi all'inizio.
+   - Inizio del funzionamento della scheda di controllo (TOI). Al suo interno, la porta e il WC isolati.
+   - La scheda di controllo TOI inizia a rilevare un'anomalia nell'impianto di scarico dei rifiuti (sistema scarico tazza) e segnala l'avvenuta avaria.
+   - Il WC passa dal stato "Libero" al "Occupato", segnalando che è in uso.
+   - La porta viene aperta, indicando un utilizzo dell'impianto.
+   - In seguito, la porta e il WC tornano entrambi liberi.
+   - Il sistema scarico dei rifiuti rimane avaro e il WC passa nuovamente in stato "Occupato", senza alcun avviso di utilizzo.
+   - La sequenza riprende con la porta che viene aperta, senza chiarimento se è un nuovo utilizzo o un errore del sistema.
+   - Il WC torna nuovamente "Libero".
+   - Il sistema scarico dei rifiuti rimane avaro e il WC passa al suo stato di servizio attivo, indicando che potrebbe essere in funzione.
+   - In seguito, la porta viene nuovamente aperta e chiude senza alcun utilizzo visibile dell'impianto.
+   - Il sistema scarico dei rifiuti rimane ancora avaro e il WC ritorna "Occupato".
+   - La porta viene ancora aperta, senza indicazioni di un uso effettivo dell'impianto.
+   - Il WC torna nuovamente in stato "Libero".
+   - Altri utilizzi dell'impianto sono rilevati ma non chiari come si possano interpretare poiché non vi sono segnalazioni di utilizzo visibili.
+   - Il sistema scarico dei rifiuti rimane avaro anche dopo molti cicli.
+   - In seguito, la porta viene aperta per l'ultima volta e il WC passa al suo stato "Occupato", senza alcuna indicazione di utilizzo effettivo.
+   - La scheda di controllo TOI segnala nuovamente un errore nel sistema scarico dei rifiuti.
+   - Il WC torna infine a essere "Libero".
+   - Il sistema scarico dei rifiuti rimane ancora avaro e la porta resta aperta per qualche tempo, senza alcun utilizzo effettivo.
+   - Infine, il WC viene segnalato nuovamente "Occupato" ma non vi è alcuna indicazione di un uso.
+   - La sequenza si conclude con la chiusura della porta e l'apertura del WC.
 
-   2. Successivamente, si è verificata l'isolamento del WC, che è passato quindi in stato "fuori servizio". In contemporanea con questo evento, è avvenuto il reset dello stato del sistema scarico tazza.
+   Conclusione: Durante questo report, il sistema scarico dei rifiuti ha mostrato una continua avaria non spiegabile. Al contrario, la porta e il WC sono stati utilizzati in modo irregolare, senza alcuna indicazione di un utilizzo effettivo dell'impianto.
 
-   3. Più avanti nella giornata, si è rilevato un'anomalia nel sistema scarico tazza per cui lo stato è passato a "occupato". Al contempo, la porta ha subito un'apertura e il WC è stato liberato.
-
-   4. Successivamente, si sono verificati molti avvicendamenti di stati tra lo stato "fuori servizio" e lo stato "in servizio" per il sistema scarico tazza e la porta. Inoltre, sono state rilevate diverse anomalie nel sistema scarico tazze per cui lo stato è stato variamente impostato a "occupato" o "reset".
-
-   5. Infine, si è verificata l'isolamento del WC che ha fatto passare nuovamente questo impianto in stato "fuori servizio". In contemporanea con questo evento, la porta è stata riaperta e l'impianto di scarico dei rifiuti è tornato a essere libero.
-
-   Conclusione: Al termine della giornata, si ha una situazione complessa ed instabile degli impianti in esame. Il WC è stato in generale in stato "fuori servizio" e il sistema scarico tazza è presente continuamente in uno stato anomalo, sebbene la porta abbia subito vari apporti per tentare di risolvere i problemi riscontrati.
-
-   Riassunto: Gli impianti in esame non sono funzionanti alla fine del file.
+   Riassunto: Gli impianti in esame non sembrano essere in funzione, a causa della continuata avaria del sistema scarico dei rifiuti e degli utilizzi irregolari e non chiari delle altre componenti.
 TOI:Contatore Attivazioni Sciacquone -> Min: 6415.0, Max: 6485.0
 TOI:Contatore Attivazioni Rubinetto -> Min: 3932.0, Max: 3972.0
 TOI:Contatore Operazioni Lavandino -> Min: 4390.0, Max: 4408.0
