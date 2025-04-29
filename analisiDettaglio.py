@@ -52,6 +52,8 @@ def genera_spiegazioni(file_path):
         spiegazione = elabora_evento(evento)
         spiegazioni.append(spiegazione)
 
+    print(len(df_filtrato))
+
     return spiegazioni
 
 # Percorso del file Excel
